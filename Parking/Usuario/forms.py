@@ -5,11 +5,11 @@ from .models import Usuario
 #crear usuario en consolo
 class FormaRegistro(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget= PasswordInput)
+    password2 = forms.CharField(label='Confirm password', widget= forms.PasswordInput)
     
     class Meta:
         model = Usuario
-        fields = ('correo')
+        fields = ('correo',)
         
     def clean_email(self):
         correo = self.cleaned_data.get('correo')
@@ -20,8 +20,8 @@ class FormaRegistro(forms.ModelForm):
     
     def clean_password2(self):
         # revisar que las contraseñas coincidan
-        password1 = self.cleaned_data.get(password1)
-        password2 = self.cleaned_data.get(password2)
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
         
         if password1 and password2 and password1!=password2:
             raise forms.ValidationError("Contraseñas no coinciden")
@@ -30,7 +30,7 @@ class FormaRegistro(forms.ModelForm):
 #forma para crear nuevos usuarios. incluyen todos los campos requeridos
 class AdminFormaCreacionUsuario(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget= PasswordInput)
+    password2 = forms.CharField(label='Confirm password', widget= forms.PasswordInput)
     
     class Meta:
         model = Usuario
@@ -38,8 +38,8 @@ class AdminFormaCreacionUsuario(forms.ModelForm):
         
     def clean_password2(self):
         # revisar que las contraseñas coincidan
-        password1 = self.cleaned_data.get(password1)
-        password2 = self.cleaned_data.get(password2)
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
         
         if password1 and password2 and password1!=password2:
             raise forms.ValidationError("Contraseñas no coinciden")
