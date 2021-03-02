@@ -4,7 +4,7 @@ from .models import Usuario
 
 #crear usuario en consolo
 class FormaRegistro(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm password', widget= forms.PasswordInput)
     
     class Meta:
@@ -29,7 +29,7 @@ class FormaRegistro(forms.ModelForm):
 
 #forma para crear nuevos usuarios. incluyen todos los campos requeridos
 class AdminFormaCreacionUsuario(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm password', widget= forms.PasswordInput)
     
     class Meta:
@@ -52,7 +52,7 @@ class AdminFormaCreacionUsuario(forms.ModelForm):
         
         if commit:
             usuario.save()
-            return usuario
+        return usuario
         
         
 #forma para actualizar un usuario. incluye todos los campos requeridos, pero remplaza el campo de contraseña
