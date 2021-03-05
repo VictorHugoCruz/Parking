@@ -12,18 +12,18 @@ class UserAdmin(BaseUserAdmin):
     add_form = AdminFormaCreacionUsuario
     
     #los campos que seran utulizados para mostrar el modelo del usuario
-    list_display=('correo', 'admin')
+    list_display=('correo', 'admin','tipo')
     list_filter = ('admin',)
     fieldsets = (
         (None, {'fields':('correo', 'password')}),
         ('Informacion personal', {'fields':('nombre', 'apellido_paterno', 'apellido_materno')}),
-        ('Permisos Django', {'fields':('admin', 'staff', 'active')}),
+        ('Permisos Django', {'fields':('admin', 'staff', 'active','tipo')}),
     )
     
     add_fieldsets= (
         (None,{
             'classes':('wide',),
-            'fields':('correo', 'password1', 'password2')
+            'fields':('correo', 'password1', 'password2',)
         }),
     )
     

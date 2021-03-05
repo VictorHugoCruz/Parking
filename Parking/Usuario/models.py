@@ -3,6 +3,7 @@ from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 
 # Create your models here.
+
 class ManejadorUsuario(BaseUserManager):
 #crea y guarda a un usuario con el correo y contraseña dadas
     def create_user(self, correo, password=None):
@@ -40,13 +41,23 @@ class ManejadorUsuario(BaseUserManager):
         usuario.save(using=self._db)
         return usuario
 
-
+#tipo de usuario
+tipo_usuario=[
+    (True,'Usuario'),
+    (False,'Propietario')
+    
+]
 
 class Usuario(AbstractBaseUser):
     correo = models.EmailField(verbose_name='correo electronico', max_length=100, unique=True)
     nombre = models.CharField(max_length=50)
     apellido_paterno = models.CharField(max_length=50)
     apellido_materno = models.CharField(max_length=50)
+    tipo = models.BooleanField(
+        null=False, blank=False,
+        choices=tipo_usuario,
+        default=True
+    )
     
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -57,6 +68,7 @@ class Usuario(AbstractBaseUser):
     
     USERNAME_FIELD = 'correo' #definimos el correo como nombre de usuario
     REQUIRED_FIELDS = []#correo y contraseña son requeridos por defecto
+
     
     class Meta: #cambiar como aparece el nombre del modelo en la seccion de administracion de django
         verbose_name ="usuario"

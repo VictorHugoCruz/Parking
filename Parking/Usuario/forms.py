@@ -9,7 +9,14 @@ class FormaRegistro(forms.ModelForm):
     
     class Meta:
         model = Usuario
-        fields = ('correo',)
+        fields = ('correo','tipo',)
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['tipo'].widget.attrs.update({
+            'class':'form-control',
+        })
+    
         
     def clean_email(self):
         correo = self.cleaned_data.get('correo')
